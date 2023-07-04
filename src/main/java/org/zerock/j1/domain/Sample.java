@@ -28,4 +28,10 @@ public class Sample {
 
     private String last;
 
+    private String addr;
+
+    private String zipCode;
+
+    private String city;
+
 }

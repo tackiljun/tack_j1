@@ -1,6 +1,7 @@
 package org.zerock.j1.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.modelmapper.ModelMapper;
@@ -52,6 +53,36 @@ public class TodoServiceImpl implements TodoService {
 
         return modelMapper.map(result, TodoDTO.class);
         
+    }
+
+    @Override
+    public TodoDTO getOne(Long tno) {
+        
+        Optional<Todo> result = todoRepository.findById(tno);
+
+        Todo todo = result.orElseThrow();
+
+        TodoDTO dto = modelMapper.map(todo, TodoDTO.class);
+
+        return dto;
+    }
+
+    @Override
+    public void remove(Long tno) {
+        
+        todoRepository.deleteById(tno);
+    }
+
+    @Override
+    public void modify(TodoDTO dto) {
+        
+        Optional<Todo> result = todoRepository.findById(dto.getTno());
+
+        Todo todo = result.orElseThrow();
+
+        todo.changeTitle(dto.getTitle());
+
+        todoRepository.save(todo);
     }
 
     
