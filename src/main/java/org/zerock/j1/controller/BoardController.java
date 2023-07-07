@@ -4,8 +4,10 @@ import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.zerock.j1.dto.BoardDTO;
 import org.zerock.j1.dto.BoardListRcntDTO;
 import org.zerock.j1.dto.PageRequestDTO;
 import org.zerock.j1.dto.PageResponseDTO;
@@ -30,5 +32,10 @@ public class BoardController {
 
         return boardService.listRcnt(requestDTO);
     }
-    
+
+    @GetMapping("/{bno}")
+    public BoardDTO get(@PathVariable("bno") Long bno) {
+
+        return boardService.getOne(bno);
+    }
 }
