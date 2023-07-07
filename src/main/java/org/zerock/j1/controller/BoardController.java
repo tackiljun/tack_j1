@@ -1,5 +1,6 @@
 package org.zerock.j1.controller;
 
+import org.springdoc.core.annotations.ParameterObject;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,7 +24,7 @@ public class BoardController {
     private final BoardService boardService;
 
     @GetMapping(value = "/list")
-    public PageResponseDTO<BoardListRcntDTO> list(PageRequestDTO requestDTO) {
+    public PageResponseDTO<BoardListRcntDTO> list(@ParameterObject PageRequestDTO requestDTO) {
 
         log.info(requestDTO);
 
