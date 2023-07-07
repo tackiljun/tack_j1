@@ -37,7 +37,4 @@ public class Board extends BaseEntity {
     public void changeTitle(String title) {
         this.title = title;
     }
-
-
-
 }
