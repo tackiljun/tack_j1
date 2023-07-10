@@ -10,6 +10,10 @@ public interface ReplyService {
 
     // 모든 리스트 리턴 타입은 PageResponseDTO
     PageResponseDTO<ReplyDTO> list(ReplyPageRequestDTO requestDTO);
+
+    Long register(ReplyDTO replyDTO);
+
+    ReplyDTO read(Long rno);
     
 
 

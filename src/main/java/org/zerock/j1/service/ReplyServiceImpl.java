@@ -1,6 +1,7 @@
 package org.zerock.j1.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
@@ -38,8 +39,8 @@ public class ReplyServiceImpl implements ReplyService {
 
         if(last) {
             long totalCount = replyRepository.getCountBoard(requestDTO.getBno());
-
             pageNum = (int)(Math.ceil(totalCount/(double)requestDTO.getSize()));
+            pageNum = pageNum <= 0? 1: pageNum;
         }
         
         Pageable pageable = 
@@ -56,10 +57,37 @@ public class ReplyServiceImpl implements ReplyService {
             .map(en -> modelMapper.map(en, ReplyDTO.class))
             .collect((Collectors.toList()));
 
-        PageResponseDTO<ReplyDTO> responseDTO = new PageResponseDTO<>(dtoList, totalReplyCount, requestDTO);
+        PageResponseDTO<ReplyDTO> responseDTO = 
+            new PageResponseDTO<>(dtoList, totalReplyCount, requestDTO);
         responseDTO.setPage(pageNum);
 
         return responseDTO;
+    }
+
+    @Override
+    public Long register(ReplyDTO replyDTO) {
+
+        Reply reply = modelMapper.map(replyDTO, Reply.class);
+
+        log.info("reply.....");
+        log.info(reply);
+
+
+        Long newBno = replyRepository.save(reply).getRno();
+
+
+        
+        return newBno;
+    }
+
+    @Override
+    public ReplyDTO read(Long rno) {
+        
+        Optional<Reply> result = replyRepository.findById(rno);
+
+        Reply reply = result.orElseThrow();
+
+        return modelMapper.map(reply, ReplyDTO.class);
     }
 
 

@@ -12,4 +12,14 @@ public class ReplyDTO {
     private String replyFile;
 
     private String replyer;
+
+    private Long bno;
+
+    public void changeText(String text) {
+        this.replyText = text;
+    }
+
+    public void changeFile(String fileName) {
+        this.replyFile = fileName;
+    }
 }
