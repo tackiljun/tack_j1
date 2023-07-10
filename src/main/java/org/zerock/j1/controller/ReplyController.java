@@ -3,6 +3,7 @@ package org.zerock.j1.controller;
 import java.util.Map;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -62,5 +63,12 @@ public class ReplyController {
     public ReplyDTO get(@PathVariable("rno") Long rno) {
         return replyService.read(rno);
     }
-    
+
+    @DeleteMapping("/{rno}")
+    public Map<String, Long> remove(@PathVariable("rno") Long rno) {
+
+        replyService.remove(rno);
+
+        return Map.of("result", rno);
+    }
 }
