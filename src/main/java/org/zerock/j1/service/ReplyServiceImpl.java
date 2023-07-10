@@ -101,7 +101,19 @@ public class ReplyServiceImpl implements ReplyService {
         reply.changeFile(null);
 
         replyRepository.save(reply);
+    }
 
+    @Override
+    public void modify(ReplyDTO replyDTO) {
+
+        Optional<Reply> result = replyRepository.findById(replyDTO.getRno());
+
+        Reply reply = result.orElseThrow();
+
+        reply.changeText(replyDTO.getReplyText());
+        reply.changeFile(replyDTO.getReplyFile());
+
+        replyRepository.save(reply);
     }
 
 

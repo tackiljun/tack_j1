@@ -161,7 +161,11 @@ public class BoardSearchImpl extends QuerydslRepositorySupport implements BoardS
             board.bno, 
             board.title, 
             board.writer, 
-            reply.countDistinct().as("replyCount")));
+            reply.countDistinct().as("replyCount"),
+            board.regDate,
+            board.modDate
+            
+            ));
 
         List<BoardListRcntDTO> list = listQuery.fetch();
 

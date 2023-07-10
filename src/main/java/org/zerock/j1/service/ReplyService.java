@@ -8,7 +8,7 @@ import org.zerock.j1.dto.ReplyPageRequestDTO;
 @Transactional
 public interface ReplyService {
 
-    // 모든 리스트 리턴 타입은 PageResponseDTO
+    // 모든 리스트 리턴 타입은 PageResponseDTO.
     PageResponseDTO<ReplyDTO> list(ReplyPageRequestDTO requestDTO);
 
     Long register(ReplyDTO replyDTO);
@@ -16,6 +16,8 @@ public interface ReplyService {
     ReplyDTO read(Long rno);
 
     void remove(Long rno);
+
+    void modify(ReplyDTO replyDTO);
     
 
 
